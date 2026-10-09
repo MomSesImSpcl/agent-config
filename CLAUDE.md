@@ -10,4 +10,4 @@ Any change in a file that you didn't make is my own edit. Build on the current f
 When you save or update a project memory and the rule would also be useful in other projects, suggest adding it here. Only add it after I say yes.
 
 ## Sync global rules
-After you add or change a rule in `~/.claude/CLAUDE.md`, commit just that file with a short descriptive message and `git push` from `~/.claude`. If the push fails, tell me instead of retrying. Don't commit or push my own uncommitted edits to that file without asking.
+After you add or change a rule in `~/.claude/CLAUDE.md`, commit just that file with a short descriptive message and `git push` from `~/.claude`. If the push is rejected because GitHub has newer commits (another machine pushed first), run `git pull --rebase` in `~/.claude`, then push again. If the rebase hits a conflict, stop, show me both versions of the conflicting lines, and ask which to keep. Never use `git reset --hard`, `git push --force`, or `git checkout -- CLAUDE.md` on this repo to resolve it. For any other push failure (auth, network), tell me instead of retrying. Don't commit or push my own uncommitted edits to that file without asking.

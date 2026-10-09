@@ -14,3 +14,6 @@ After you add or change a rule in `~/.claude/CLAUDE.md`, commit just that file w
 
 ## Keep global rules small
 After editing `~/.claude/CLAUDE.md`, check its line count. If it is over 200 lines, tell me and suggest a reasonable split into topic files in `~/.claude/rules/` (e.g. `git.md`, `writing.md`). Also suggest which rules should only apply to certain file types, using `paths:` frontmatter (e.g. `paths: ["**/*.ts"]`). Only suggest; make no split, move or `paths:` change until I approve. If I approve, update the repo's `.git/info/exclude` so `rules/` is tracked, then commit and push as above.
+
+## Commit means push
+When I say "commit", also push after committing. Don't ask separately.

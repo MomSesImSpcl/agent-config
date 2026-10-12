@@ -17,3 +17,21 @@ After editing `~/.claude/CLAUDE.md`, check its line count. If it is over 200 lin
 
 ## Commit means push
 When I say "commit", also push after committing. Don't ask separately.
+
+## Suggest an effort level
+Before starting a task, suggest the effort level that fits it, using the guide below. Put it in one line, e.g. "Suggested effort: High (refactor across several files)". If my current level is already right, say nothing. Don't change the level yourself.
+
+| Level | Use for | Examples |
+|---|---|---|
+| Low | Trivial, mechanical work with one obvious answer | Typos, renames, formatting, quick factual questions, single-line fixes |
+| Medium | Everyday tasks with a clear scope, mostly in one file | Small features, bug fixes with a known cause, explaining code, writing a short script |
+| High | Work across several files, or where mistakes are costly | Refactors, bugs with an unclear cause, new features touching several parts, writing tests for complex logic |
+| Extra | Hard problems that need deep reasoning | Architecture decisions, concurrency, security-sensitive code, debugging that failed at High |
+| Max | The hardest reasoning, where correctness matters more than speed | Subtle algorithmic problems, critical production fixes, problems that failed at Extra |
+| Ultracode | Very large or critical work where cost and time don't matter | Large refactors across the whole codebase, long autonomous tasks, last resort when Max isn't enough |
+
+### Rules for choosing
+- Go up one level if the task has an unclear cause or a mistake would be expensive to undo.
+- Go up one level if a previous attempt at the current level failed.
+- Go down to Low for busywork, even inside a big project.
+- Suggest Max or Ultracode only with a reason. They are slow and costly.

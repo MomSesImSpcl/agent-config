@@ -5,8 +5,8 @@ if [ ! -d .git ]; then
   echo "Claude config repo not set up here. Clone https://github.com/MomSesImSpcl/claude-config into ~/.claude (see its README)."
   exit 0
 fi
-# Older clones only un-ignore the original root files; let rules/ and setup/ through.
-for p in '!rules/' '!rules/**' '!setup/' '!setup/**'; do
+# Older clones only un-ignore the original root files; let LICENSE, rules/ and setup/ through.
+for p in '!LICENSE' '!rules/' '!rules/**' '!setup/' '!setup/**'; do
   grep -qxF "$p" .git/info/exclude 2>/dev/null || echo "$p" >> .git/info/exclude
 done
 command -v rtk >/dev/null || echo "rtk is not installed on this machine, but rules/rtk.md expects it. Tell the user to follow ~/.claude/setup/rtk.md."

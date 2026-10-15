@@ -17,7 +17,7 @@ My Claude Code config: global rules plus setup guides for the tools they rely on
    cd ~/.claude
    git init -b main
    git remote add origin https://github.com/MomSesImSpcl/claude-config.git
-   printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n!rules/\n!rules/**\n!setup/\n!setup/**\n' >> .git/info/exclude
+   printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n!LICENSE\n!rules/\n!rules/**\n!setup/\n!setup/**\n' >> .git/info/exclude
    git fetch origin && git reset --hard origin/main
    git branch --set-upstream-to=origin/main main
    ```

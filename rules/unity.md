@@ -4,7 +4,7 @@ paths: ["**/*.cs", "**/*.asmdef", "**/*.unity", "**/*.prefab", "**/ProjectSettin
 
 # Unity / C# performance skills
 
-When working on Unity or C# code, check whether the Unity Performance plugin is enabled: `"unity-perf@gqy-plugins": true` in `~/.claude/settings.json` or the project's `.claude/settings.json`. If it isn't, remind me once per session, in one line, to install it, and give these commands:
+When working on Unity or C# code, use the Unity Performance plugin skills when available. In Claude Code, check for `"unity-perf@gqy-plugins": true` in `~/.claude/settings.json` or the project's `.claude/settings.json`. If they are not enabled, remind me once per session, in one line, to install the plugin, and give these commands:
 
 ```bash
 claude plugin marketplace add MomSesImSpcl/Unity-Performance

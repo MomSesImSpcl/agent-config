@@ -1,6 +1,6 @@
 # rtk
 
-`rules/rtk.md` expects rtk, which condenses command output to save tokens.
+`SHARED.md` describes RTK command output handling; install RTK to get the condensed output it documents.
 
 1. Install it, then set up its hook (answer `y` to patch `settings.json`):
    ```bash

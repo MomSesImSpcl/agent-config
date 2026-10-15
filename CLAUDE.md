@@ -19,25 +19,32 @@ After editing `~/.claude/CLAUDE.md`, check its line count. If it is over 200 lin
 When I say "commit", also push after committing. Don't ask separately.
 
 ## Suggest an effort level
-Before every request, suggest the effort level that fits it, using the guide below. Put it in one line, e.g. "Suggested effort: High (refactor across several files)". If my current level is already right, say nothing and do the work right away. Otherwise it's a 2-step process:
+Before every request, suggest the effort level that fits it, using the guide below. Put it in one line, e.g. "Suggested effort: High (unclear cause, several interacting parts)". If my current level is already right, say nothing and do the work right away. Otherwise it's a 2-step process:
 1. Reply with only the suggestion. Don't start the work.
 2. On my next message, do the work at whatever level I'm on, even if I didn't switch. Don't suggest again for the same request.
 
 Don't change the level yourself. Check my current level with `get_session` (`"self"`). It can't report Ultracode, so whenever you think a task warrants Ultracode, always say so, even if I might already be on it.
 
+Pick the lowest level that is enough, based on reasoning complexity, uncertainty, scope, risk and how hard the result is to verify. Task length and file count don't decide it.
+
 | Level | Use for | Examples |
 |---|---|---|
-| Low | Trivial, mechanical work with one obvious answer | Typos, renames, formatting, quick factual questions, single-line fixes |
-| Medium | Everyday tasks with a clear scope, mostly in one file | Small features, bug fixes with a known cause, explaining code, writing a short script |
-| High | Work across several files, or where mistakes are costly | Refactors, bugs with an unclear cause, new features touching several parts, writing tests for complex logic |
-| Extra (xhigh) | Hard problems that need deep reasoning | Architecture decisions, concurrency, security-sensitive code, debugging that failed at High |
-| Max | The hardest reasoning, where correctness matters more than speed | Subtle algorithmic problems, critical production fixes, problems that failed at Extra |
-| Ultracode | Very large or critical work where cost and time don't matter | Large refactors across the whole codebase, long autonomous tasks, last resort when Max isn't enough |
+| Low | Straightforward, deterministic tasks with clear instructions and minimal reasoning | Formatting, documentation, renaming, simple fixes |
+| Medium | Moderate reasoning with established solutions and limited uncertainty | Standard features, routine refactoring, unit tests, isolated debugging |
+| High | Complex multistep reasoning, interacting components, unclear solutions or real trade-offs | Advanced features, routine architecture choices, performance optimization, complex debugging |
+| Extra (xhigh) | Deep, sustained reasoning across interconnected systems, hard constraints or extensive evaluation | Distributed systems, system-wide redesigns, difficult concurrency issues |
+| Max | Exceptional difficulty, novel problems, critical correctness, or problems Extra failed to solve | Only where more reasoning clearly helps |
+| Ultracode | Multi-agent orchestration for large tasks that split into independent parts | Repository-wide audits, large migrations, independent implementations. Not smarter than Max: it is about parallel work, not deeper reasoning |
 
 ### Rules for choosing
-- Go up one level if the task has an unclear cause or a mistake would be expensive to undo.
-- Go up one level if a previous attempt at the current level failed.
-- Go down to Low for busywork, even inside a big project.
-- Suggest Max or Ultracode only with a reason. They are slow and costly.
+1. Default to the lowest level likely to succeed reliably.
+2. Weigh complexity and uncertainty over task size.
+3. For high-risk changes, verify more thoroughly, whatever the level.
+4. Go up a level only when more reasoning is likely to solve the problem. Missing context needs looking up, not a higher level.
+5. Go up one level if a previous attempt at the current level failed.
+6. Suggest one level per request. If a later phase clearly needs a different level, mention it in one line at that point, without stopping.
+7. Suggest Ultracode only when parallel work outweighs the coordination overhead.
+8. Suggest Max or Ultracode only with a reason. They are slow and costly.
+9. Respect my overrides and the levels the current model supports.
 
 @RTK.md

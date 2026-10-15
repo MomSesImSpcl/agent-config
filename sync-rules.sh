@@ -12,19 +12,10 @@ sync_codex_files() {
       cp "$file" "$CODEX_DIR/$file.tmp" && mv "$CODEX_DIR/$file.tmp" "$CODEX_DIR/$file" || return 1
     fi
   done
-  if [ -d .agents/skills ]; then
-    mkdir -p "$CODEX_DIR/skills" || return 1
-    for skill in .agents/skills/*; do
-      [ -d "$skill" ] || continue
-      mkdir -p "$CODEX_DIR/skills/$(basename "$skill")" || return 1
-      for file in "$skill"/*; do
-        [ -f "$file" ] || continue
-        target="$CODEX_DIR/skills/$(basename "$skill")/$(basename "$file")"
-        if ! cmp -s "$file" "$target"; then
-          cp "$file" "$target.tmp" && mv "$target.tmp" "$target" || return 1
-        fi
-      done
-    done
+  # rules/unity.md is both Claude's path-scoped rule and Codex's on-demand skill.
+  target="$CODEX_DIR/skills/unity-csharp/SKILL.md"
+  if [ -f rules/unity.md ] && ! cmp -s rules/unity.md "$target"; then
+    mkdir -p "$(dirname "$target")" && cp rules/unity.md "$target.tmp" && mv "$target.tmp" "$target" || return 1
   fi
 }
 
@@ -45,7 +36,7 @@ if [ ! -d .git ]; then
   exit 0
 fi
 # Compatibility for older clones that ignore all but the original root files.
-for p in '!LICENSE' '!rules/' '!rules/**' '!setup/' '!setup/**' '!AGENTS.md' '!SHARED.md' '!sync-rules.ps1' '!.agents/' '!.agents/**'; do
+for p in '!LICENSE' '!rules/' '!rules/**' '!setup/' '!setup/**' '!AGENTS.md' '!SHARED.md' '!sync-rules.ps1'; do
   grep -qxF "$p" .git/info/exclude 2>/dev/null || echo "$p" >> .git/info/exclude
 done
 stamp=.git/last-sync

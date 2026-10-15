@@ -19,18 +19,10 @@ function Sync-CodexFiles {
     foreach ($name in @('AGENTS.md', 'SHARED.md')) {
         Copy-IfDifferent (Join-Path $repoRoot $name) (Join-Path $codexHome $name)
     }
-    $skillsSource = Join-Path $repoRoot '.agents\skills'
-    if (Test-Path -LiteralPath $skillsSource) {
-        $skillsTarget = Join-Path $codexHome 'skills'
-        New-Item -ItemType Directory -Force -Path $skillsTarget | Out-Null
-        Get-ChildItem -LiteralPath $skillsSource -Directory | ForEach-Object {
-            $targetDir = Join-Path $skillsTarget $_.Name
-            New-Item -ItemType Directory -Force -Path $targetDir | Out-Null
-            Get-ChildItem -LiteralPath $_.FullName -File | ForEach-Object {
-                Copy-IfDifferent $_.FullName (Join-Path $targetDir $_.Name)
-            }
-        }
-    }
+    # rules/unity.md is both Claude's path-scoped rule and Codex's on-demand skill.
+    $skillDir = Join-Path $codexHome 'skills\unity-csharp'
+    New-Item -ItemType Directory -Force -Path $skillDir | Out-Null
+    Copy-IfDifferent (Join-Path $repoRoot 'rules\unity.md') (Join-Path $skillDir 'SKILL.md')
 }
 
 if ($SyncOnly) { Sync-CodexFiles; exit 0 }
@@ -44,7 +36,7 @@ if ($settingsText -notmatch '"cache-tax@claude-code-mods"\s*:\s*true') { Write-O
 $excludePath = Join-Path $repoRoot '.git\info\exclude'
 if (Test-Path -LiteralPath $excludePath) {
     $excludeLines = @(Get-Content -LiteralPath $excludePath)
-    foreach ($line in @('!LICENSE', '!rules/', '!rules/**', '!setup/', '!setup/**', '!AGENTS.md', '!SHARED.md', '!sync-rules.ps1', '!.agents/', '!.agents/**')) {
+    foreach ($line in @('!LICENSE', '!rules/', '!rules/**', '!setup/', '!setup/**', '!AGENTS.md', '!SHARED.md', '!sync-rules.ps1')) {
         if ($excludeLines -cnotcontains $line) { Add-Content -LiteralPath $excludePath -Value $line }
     }
 }

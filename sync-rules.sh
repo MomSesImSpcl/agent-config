@@ -12,6 +12,7 @@ done
 command -v rtk >/dev/null || echo "rtk is not installed on this machine, but rules/rtk.md expects it. Tell the user to follow ~/.claude/setup/rtk.md."
 grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md."
 grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md."
+grep -q '"cache-tax@claude-code-mods": true' settings.json 2>/dev/null || echo "The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md."
 stamp=.git/last-sync
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)

@@ -31,7 +31,7 @@ My Claude Code config: global rules plus setup guides for the tools they rely on
    }
    ```
 4. Needs `git` authenticated to GitHub (`gh auth login`).
-5. Install the tools: [rtk](setup/rtk.md), [Ponytail](setup/ponytail.md), [Caveman](setup/caveman.md). `sync-rules.sh` warns at session start while any of them is missing.
+5. Install the tools: [rtk](setup/rtk.md), [Ponytail](setup/ponytail.md), [Caveman](setup/caveman.md), [Cache Tax](setup/cache-tax.md). `sync-rules.sh` warns at session start while any of them is missing.
 
 ## Day to day
 - Claude commits and pushes rule changes itself (see the "Sync global rules" rule).

@@ -35,3 +35,5 @@ Before starting a task, suggest the effort level that fits it, using the guide b
 - Go up one level if a previous attempt at the current level failed.
 - Go down to Low for busywork, even inside a big project.
 - Suggest Max or Ultracode only with a reason. They are slow and costly.
+
+@RTK.md

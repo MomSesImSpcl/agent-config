@@ -27,7 +27,7 @@ After a rule edit, inspect the full diff. Commit only relevant tracked source fi
    cd ~/.claude
    git init -b main
    git remote add origin https://github.com/MomSesImSpcl/claude-config.git
-   printf '*\n!CLAUDE.md\n!AGENTS.md\n!SHARED.md\n!sync-rules.sh\n!sync-rules.ps1\n!README.md\n!LICENSE\n!rules/\n!rules/**\n!setup/\n!setup/**\n!.agents/\n!.agents/**\n' >> .git/info/exclude
+   printf '*\n!CLAUDE.md\n!AGENTS.md\n!SHARED.md\n!sync-rules.sh\n!sync-rules.ps1\n!README.md\n!LICENSE\n!rules/\n!rules/**\n!setup/\n!setup/**\n' >> .git/info/exclude
    git fetch origin && git reset --hard origin/main
    git branch --set-upstream-to=origin/main main
    ```

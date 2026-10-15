@@ -30,6 +30,17 @@
    rtk init -g
    ```
    `sync-rules.sh` warns at session start while rtk is missing.
+6. Install the Ponytail plugin:
+   ```bash
+   claude plugin marketplace add DietrichGebert/ponytail
+   claude plugin install ponytail@ponytail
+   ```
+7. Install Caveman. It needs Node.js 22.13+ (check `node -v`; with nvm: `nvm install 24.20.0` then `nvm use 24.20.0`). On Windows PowerShell use `npx.cmd`, not `npx`:
+   ```bash
+   npx.cmd @caveman-ai/cli@latest
+   ```
+   This includes the Caveman plugin; don't install it separately. Optional: `caveman.cmd login` for the Auto model.
+8. Restart Claude Code. `sync-rules.sh` warns at session start while Ponytail or Caveman is missing.
 
 ## Day to day
 - Claude commits and pushes rule changes itself (see the "Sync global rules" rule).

@@ -33,6 +33,7 @@ $settingsText = if (Test-Path -LiteralPath $settingsPath) { Get-Content -Raw $se
 if ($settingsText -notmatch '"ponytail@ponytail"\s*:\s*true') { Write-Output 'The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md.' }
 if ($settingsText -notmatch '"caveman@caveman"\s*:\s*true') { Write-Output 'Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md.' }
 if ($settingsText -notmatch '"cache-tax@claude-code-mods"\s*:\s*true') { Write-Output 'The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md.' }
+if ($settingsText -notmatch 'Effort check: before acting') { Write-Output 'The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md.' }
 $excludePath = Join-Path $repoRoot '.git\info\exclude'
 if (Test-Path -LiteralPath $excludePath) {
     $excludeLines = @(Get-Content -LiteralPath $excludePath)

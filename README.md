@@ -44,4 +44,4 @@ After a rule edit, inspect the full diff. Commit only relevant tracked source fi
 
 ## Tool setup guides
 
-[RTK](setup/rtk.md) · [Ponytail](setup/ponytail.md) · [Caveman](setup/caveman.md) · [Cache Tax](setup/cache-tax.md)
+[RTK](setup/rtk.md) · [Ponytail](setup/ponytail.md) · [Caveman](setup/caveman.md) · [Cache Tax](setup/cache-tax.md) · [Effort hook](setup/effort-hook.md)

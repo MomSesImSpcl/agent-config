@@ -29,6 +29,7 @@ command -v rtk >/dev/null || echo "rtk is not installed on this machine, but rul
 grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md."
 grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md."
 grep -q '"cache-tax@claude-code-mods": true' settings.json 2>/dev/null || echo "The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md."
+grep -q 'Effort check: before acting' settings.json 2>/dev/null || echo "The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md."
 
 if [ ! -d .git ]; then
   echo "Config repo not set up here. Clone https://github.com/MomSesImSpcl/agent-config into ~/.claude (see its README)."

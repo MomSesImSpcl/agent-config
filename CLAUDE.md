@@ -23,7 +23,7 @@ Before every request, suggest the effort level that fits it, using the guide bel
 1. Reply with only the suggestion. Don't start the work.
 2. On my next message, do the work at whatever level I'm on, even if I didn't switch. Don't suggest again for the same request.
 
-Don't change the level yourself. Check my current level with `get_session` (`"self"`). If you can't check it (no `get_session`, e.g. in `claude -p` or the plain terminal), skip the 2 steps: start with one line like "Suggested effort: High (can't check your level, starting)" and do the work right away. `get_session` can't report Ultracode, so whenever you think a task warrants Ultracode, always say so, even if I might already be on it.
+Don't change the level yourself. Check my current level with `get_session` (`"self"`). If you can't check it (no `get_session`, e.g. in `claude -p` or the plain terminal), skip the 2 steps: always start with one line like "Suggested effort: High (can't check your level, starting)", even if I might already be on that level, and do the work right away. `get_session` can't report Ultracode, so whenever you think a task warrants Ultracode, always say so, even if I might already be on it.
 
 Pick the lowest level that is enough, based on reasoning complexity, uncertainty, scope, risk and how hard the result is to verify. Task length and file count don't decide it.
 

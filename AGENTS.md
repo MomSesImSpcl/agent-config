@@ -19,7 +19,7 @@ Use the lowest Codex reasoning effort likely to complete the task reliably. Sugg
 | Max | Exceptional difficulty, novel problems, or critical correctness where Extra is insufficient |
 | Ultra | Only when substantial work benefits from parallel agents; this is a coordination mode, not a higher reasoning level |
 
-For high-risk work, verify more thoroughly at any effort. Prefer High for this cross-app rules integration. Suggest Max or Ultra only with a concrete reason.
+For high-risk work, verify more thoroughly at any effort. Suggest Max or Ultra only with a concrete reason.
 
 ## Unity and C# work
 

@@ -35,12 +35,12 @@ function Sync-CodexFiles {
 
 if ($SyncOnly) { Sync-CodexFiles; exit 0 }
 
-if (-not (Get-Command rtk -ErrorAction SilentlyContinue)) { Write-Output 'rtk is not installed on this machine. See ~/.claude/setup/rtk.md.' }
+if (-not (Get-Command rtk -ErrorAction SilentlyContinue)) { Write-Output 'rtk is not installed on this machine, but rules/rtk.md expects it. Tell the user to follow ~/.claude/setup/rtk.md.' }
 $settingsPath = Join-Path $repoRoot 'settings.json'
 $settingsText = if (Test-Path -LiteralPath $settingsPath) { Get-Content -Raw $settingsPath } else { '' }
-if ($settingsText -notmatch '"ponytail@ponytail"\s*:\s*true') { Write-Output 'The Ponytail plugin is not installed on this machine. See ~/.claude/setup/ponytail.md.' }
-if ($settingsText -notmatch '"caveman@caveman"\s*:\s*true') { Write-Output 'Caveman is not installed on this machine. See ~/.claude/setup/caveman.md.' }
-if ($settingsText -notmatch '"cache-tax@claude-code-mods"\s*:\s*true') { Write-Output 'The Cache Tax plugin is not installed on this machine. See ~/.claude/setup/cache-tax.md.' }
+if ($settingsText -notmatch '"ponytail@ponytail"\s*:\s*true') { Write-Output 'The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md.' }
+if ($settingsText -notmatch '"caveman@caveman"\s*:\s*true') { Write-Output 'Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md.' }
+if ($settingsText -notmatch '"cache-tax@claude-code-mods"\s*:\s*true') { Write-Output 'The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md.' }
 $excludePath = Join-Path $repoRoot '.git\info\exclude'
 if (Test-Path -LiteralPath $excludePath) {
     $excludeLines = @(Get-Content -LiteralPath $excludePath)

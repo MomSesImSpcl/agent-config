@@ -22,8 +22,18 @@ After a rule edit, inspect the full diff. Commit only relevant tracked source fi
 
 ## Setup on a new machine
 
-1. Back up existing `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` before linking this config.
-2. Clone this repository into `~/.claude` and configure Claude Code's existing SessionStart hook to run `sync-rules.ps1` with PowerShell on Windows, or `bash ~/.claude/sync-rules.sh` on macOS/Linux. Merge with existing hooks; do not replace them.
+1. Back up existing `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` (they will be replaced).
+2. Clone into `~/.claude` (works even if the folder already exists):
+   ```bash
+   cd ~/.claude
+   git init -b main
+   git remote add origin https://github.com/MomSesImSpcl/claude-config.git
+   printf '*\n!CLAUDE.md\n!AGENTS.md\n!SHARED.md\n!sync-rules.sh\n!sync-rules.ps1\n!README.md\n!LICENSE\n!rules/\n!rules/**\n!setup/\n!setup/**\n!.agents/\n!.agents/**\n' >> .git/info/exclude
+   git fetch origin && git reset --hard origin/main
+   git branch --set-upstream-to=origin/main main
+   ```
+   The exclude rule keeps settings, credentials and projects out of the repo.
+   Then add a SessionStart hook to `~/.claude/settings.json` that runs `& "$HOME/.claude/sync-rules.ps1"` (Windows, PowerShell) or `bash ~/.claude/sync-rules.sh` (macOS/Linux). Merge with existing hooks; do not replace them.
 3. In Codex, merge a SessionStart command hook into `~/.codex/hooks.json`. On Windows use `& "$HOME/.claude/sync-rules.ps1"`; on macOS/Linux use `bash ~/.claude/sync-rules.sh`. Preserve existing hook entries. Run the script once with `-SyncOnly` (PowerShell) or `--sync-only` (Bash). It copies `AGENTS.md`, `SHARED.md`, and the Unity skill into Codex home. Review and trust the new hook in Codex if prompted.
 4. Ensure Git is authenticated to GitHub. Sync uses fetch plus fast-forward only; it will not pull over local or unpushed changes.
 

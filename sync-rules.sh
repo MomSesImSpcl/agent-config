@@ -34,25 +34,25 @@ if [ "${1:-}" = "--sync-only" ]; then
   exit $?
 fi
 
+command -v rtk >/dev/null || echo "rtk is not installed on this machine, but rules/rtk.md expects it. Tell the user to follow ~/.claude/setup/rtk.md."
+grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md."
+grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md."
+grep -q '"cache-tax@claude-code-mods": true' settings.json 2>/dev/null || echo "The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md."
+
+if [ ! -d .git ]; then
+  echo "Claude config repo not set up here. Clone https://github.com/MomSesImSpcl/claude-config into ~/.claude (see its README)."
+  sync_codex_files
+  exit 0
+fi
 # Compatibility for older clones that ignore all but the original root files.
 for p in '!LICENSE' '!rules/' '!rules/**' '!setup/' '!setup/**' '!AGENTS.md' '!SHARED.md' '!sync-rules.ps1' '!.agents/' '!.agents/**'; do
   grep -qxF "$p" .git/info/exclude 2>/dev/null || echo "$p" >> .git/info/exclude
 done
-command -v rtk >/dev/null || echo "rtk is not installed on this machine. See ~/.claude/setup/rtk.md."
-grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. See ~/.claude/setup/ponytail.md."
-grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. See ~/.claude/setup/caveman.md."
-grep -q '"cache-tax@claude-code-mods": true' settings.json 2>/dev/null || echo "The Cache Tax plugin is not installed on this machine. See ~/.claude/setup/cache-tax.md."
-
-if [ ! -d .git ]; then
-  echo "Claude config repo not set up here. Clone https://github.com/MomSesImSpcl/claude-config into ~/.claude."
-  sync_codex_files
-  exit 0
-fi
 stamp=.git/last-sync
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)
 if [ $((now - last)) -ge 21600 ]; then
-  if git fetch -q origin 2>/dev/null; then
+  if timeout 15 git fetch -q origin 2>/dev/null; then
     echo "$now" > "$stamp"
     if [ "$(git rev-parse HEAD 2>/dev/null)" != "$(git rev-parse '@{u}' 2>/dev/null)" ]; then
       if [ -n "$(git status --porcelain)" ] || [ -n "$(git log '@{u}..HEAD' --oneline 2>/dev/null)" ]; then

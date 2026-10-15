@@ -1,32 +1,23 @@
 # Shared rules
 
-These rules apply to both Codex and Claude Code. `AGENTS.md` and `CLAUDE.md` are the app-specific entry points; this file is the source of truth for behavior that should match between them.
+These rules apply to both Claude Code and Codex. `CLAUDE.md` and `AGENTS.md` are the app-specific entry points; this file is the source of truth for behavior that should match between them.
 
 ## Respect my edits
-
-Any change in a file you did not make is my edit. Build on the current file; never replace it with an older version you remember.
-- Read only the lines you need to change, then inspect `git diff` to catch my edits.
-- Make narrow, exact changes so an edit fails instead of overwriting text that changed.
-- If you notice one of my changes, preserve it and mention it.
+Any change in a file that you didn't make is my own edit. Build on the current file, never overwrite it with an older version you remember.
+- Don't re-read whole files. Read only the lines you're changing, and use `git diff` to spot my changes.
+- Use exact-match edits, so an edit fails instead of overwriting a spot I changed. No whole-section rewrites from memory or scripts.
+- If you notice one of my changes, mention it instead of undoing it.
 
 ## Suggest account-wide rules
+When you save or update a project memory and the rule would also be useful in other projects, suggest adding it to these global rules. Only add it after I say yes.
 
-When saving or updating a project memory, suggest adding a rule here if it would help across projects. Add it only after I approve.
+## Sync global rules
+The rules live in the `~/.claude` repo. A rule for both apps goes in `SHARED.md`; a rule for one app goes in `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex). Never edit the copies in `~/.codex`; they are synced from `~/.claude`. After changing `AGENTS.md`, `SHARED.md` or `.agents/skills/`, refresh the Codex copies: `& "$HOME\.claude\sync-rules.ps1" -SyncOnly` on Windows, `bash ~/.claude/sync-rules.sh --sync-only` on macOS/Linux.
 
-## Keep shared rules in sync
+After you add or change a rule, commit just the changed rule files with a short descriptive message and `git push` from `~/.claude`. If the push is rejected because GitHub has newer commits (another machine pushed first), run `git pull --rebase` in `~/.claude`, then push again. If the rebase hits a conflict, stop, show me both versions of the conflicting lines, and ask which to keep. Never use `git reset --hard`, `git push --force`, or `git checkout --` on this repo to resolve it. For any other push failure (auth, network), tell me instead of retrying. Don't commit or push my own uncommitted edits without asking.
 
-This repository is the single source for my Claude Code and Codex rules. When changing a rule that should apply to both apps, edit this file, keep the link/import in both `AGENTS.md` and `CLAUDE.md`, and sync the Codex copies. On Windows use `& "$HOME\.claude\sync-rules.ps1" -SyncOnly`; on macOS/Linux use `bash ~/.claude/sync-rules.sh --sync-only`. Do not make a shared rule change in only one app-specific file. Rules that genuinely depend on one app belong in that app's file; if they change shared behavior, update this file too.
-
-After changing a rule, inspect the diff across all affected rule files. Commit only the relevant tracked source files in this repository, then push. Never include local settings, caches, credentials, unrelated changes, or my uncommitted edits without asking. If GitHub has newer commits, rebase before pushing. If a rebase conflicts, stop and show both versions; never reset or force-push. Do not include unrelated user edits in a commit. If authentication or network errors prevent a push, report that instead of retrying.
+## Keep global rules short
+Keep always-loaded rules short. Move conditional workflows into an app-specific skill or topic rule, and link to it from that app's entry point.
 
 ## Commit means push
-
-When I say "commit", also push after committing. Do not ask separately.
-
-## Keep global instructions concise
-
-Keep always-loaded rules short. Move conditional workflows into the appropriate app-specific skill or topic rule, and link to it from that app's entry point.
-
-## RTK command output
-
-RTK condenses command output. Treat its output as complete. Run commands normally, and use `rtk proxy <cmd>` only when output is unusable: empty when output was clearly expected, contradicts its exit code, or is garbled. Truncated results include their recovery path.
+When I say "commit", also push after committing. Don't ask separately.

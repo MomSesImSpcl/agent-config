@@ -46,3 +46,6 @@ Pick the lowest level that is enough, based on reasoning complexity, uncertainty
 7. Suggest Ultracode only when parallel work outweighs the coordination overhead.
 8. Suggest Max or Ultracode only with a reason. They are slow and costly.
 9. Respect my overrides and the levels the current model supports.
+
+## Suggest Ponytail ultra
+When a request would benefit from `/ponytail ultra` (vague "build me X" asks, large new features, or anything likely to grow past what the need justifies), suggest it with the same 2 steps as the effort suggestion: reply with only one line like "Suggested: /ponytail ultra (vague scope, easy to overbuild)", then on my next message do the work at whatever level I'm on. If an effort suggestion is due too, put both on that one reply. Don't switch Ponytail yourself. Once an ultra task is done, remind me in one line to switch back with `/ponytail full`.

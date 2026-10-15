@@ -5,9 +5,13 @@ if [ ! -d .git ]; then
   echo "Global rules repo not set up here. Clone https://github.com/MomSesImSpcl/claude-global-rules into ~/.claude (see its README)."
   exit 0
 fi
-command -v rtk >/dev/null || echo "rtk is not installed on this machine, but RTK.md expects it. Tell the user to run: winget install rtk-ai.rtk, then rtk init -g (answer y), then restart Claude Code. See ~/.claude/README.md step 5."
-grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/README.md step 6."
-grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. Tell the user to follow ~/.claude/README.md step 7."
+# Older clones only un-ignore the original root files; let rules/ and setup/ through.
+for p in '!rules/' '!rules/**' '!setup/' '!setup/**'; do
+  grep -qxF "$p" .git/info/exclude 2>/dev/null || echo "$p" >> .git/info/exclude
+done
+command -v rtk >/dev/null || echo "rtk is not installed on this machine, but rules/rtk.md expects it. Tell the user to follow ~/.claude/setup/rtk.md."
+grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md."
+grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md."
 stamp=.git/last-sync
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)

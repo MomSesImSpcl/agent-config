@@ -1,6 +1,13 @@
 # Claude global rules
 
-`CLAUDE.md` here is loaded by Claude Code in every project. `sync-rules.sh` pulls updates from GitHub at session start.
+Global Claude Code rules, synced across machines.
+
+| Path | What it is |
+|---|---|
+| `CLAUDE.md` | Main rules, loaded in every project |
+| `rules/` | Topic rules, also loaded in every project (or only for matching files, via `paths:` frontmatter) |
+| `setup/` | Install steps for the tools the rules rely on |
+| `sync-rules.sh` | Session-start hook that pulls updates from GitHub |
 
 ## Setup on a new machine
 
@@ -10,7 +17,7 @@
    cd ~/.claude
    git init -b main
    git remote add origin https://github.com/MomSesImSpcl/claude-global-rules.git
-   printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n!RTK.md\n' >> .git/info/exclude
+   printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n!rules/\n!rules/**\n!setup/\n!setup/**\n' >> .git/info/exclude
    git fetch origin && git reset --hard origin/main
    git branch --set-upstream-to=origin/main main
    ```
@@ -24,23 +31,7 @@
    }
    ```
 4. Needs `git` authenticated to GitHub (`gh auth login`).
-5. Install rtk, which `RTK.md` relies on, then set up its hook (answer `y` to patch `settings.json`) and restart Claude Code:
-   ```bash
-   winget install rtk-ai.rtk
-   rtk init -g
-   ```
-   `sync-rules.sh` warns at session start while rtk is missing.
-6. Install the Ponytail plugin:
-   ```bash
-   claude plugin marketplace add DietrichGebert/ponytail
-   claude plugin install ponytail@ponytail
-   ```
-7. Install Caveman. It needs Node.js 22.13+ (check `node -v`; with nvm: `nvm install 24.20.0` then `nvm use 24.20.0`). On Windows PowerShell use `npx.cmd`, not `npx`:
-   ```bash
-   npx.cmd @caveman-ai/cli@latest
-   ```
-   This includes the Caveman plugin; don't install it separately. Optional: `caveman.cmd login` for the Auto model.
-8. Restart Claude Code. `sync-rules.sh` warns at session start while Ponytail or Caveman is missing.
+5. Install the tools: [rtk](setup/rtk.md), [Ponytail](setup/ponytail.md), [Caveman](setup/caveman.md). `sync-rules.sh` warns at session start while any of them is missing.
 
 ## Day to day
 - Claude commits and pushes rule changes itself (see the "Sync global rules" rule).

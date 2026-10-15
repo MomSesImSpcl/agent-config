@@ -46,5 +46,3 @@ Pick the lowest level that is enough, based on reasoning complexity, uncertainty
 7. Suggest Ultracode only when parallel work outweighs the coordination overhead.
 8. Suggest Max or Ultracode only with a reason. They are slow and costly.
 9. Respect my overrides and the levels the current model supports.
-
-@RTK.md

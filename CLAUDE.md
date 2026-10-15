@@ -33,8 +33,5 @@ Pick the lowest level that is enough, based on reasoning complexity, uncertainty
 8. Suggest Max or Ultracode only with a reason. They are slow and costly.
 9. Respect my overrides and the levels the current model supports.
 
-### Suggest Ponytail ultra
-When a request would benefit from `/ponytail ultra` (vague "build me X" asks, large new features, or anything likely to grow past what the need justifies), suggest it with the same 2 steps as the effort suggestion: reply with only one line like "Suggested: /ponytail ultra (vague scope, easy to overbuild)", then on my next message do the work at whatever level I'm on. If an effort suggestion is due too, put both on that one reply. Don't switch Ponytail yourself. Once an ultra task is done, remind me in one line to switch back with `/ponytail full`.
-
 ### Keep Claude rules small
 After editing `~/.claude/CLAUDE.md`, check its line count. If it is over 200 lines, tell me and suggest a reasonable split into topic files in `~/.claude/rules/` (e.g. `git.md`, `writing.md`). Also suggest which rules should only apply to certain file types, using `paths:` frontmatter (e.g. `paths: ["**/*.ts"]`). Only suggest; make no split, move or `paths:` change until I approve. If I approve, update the repo's `.git/info/exclude` so `rules/` is tracked, then commit and push as in `SHARED.md`.

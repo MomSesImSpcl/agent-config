@@ -9,7 +9,7 @@ My shared Claude Code and Codex rules, plus app-specific guidance and setup note
 | `SHARED.md` | Canonical rules that apply to both apps |
 | `CLAUDE.md` | Claude Code entry point and Claude-specific behavior; imports `SHARED.md` |
 | `AGENTS.md` | Codex entry point and Codex-specific behavior; reads the synchronized `SHARED.md` beside it |
-| `rules/` | Topic rules for Claude Code, including path-scoped Unity guidance |
+| `rules/` | Topic rules for Claude Code |
 | `.agents/skills/` | Codex skills synced into `$CODEX_HOME/skills/` |
 | `setup/` | Tool setup guides |
 | `sync-rules.sh` / `sync-rules.ps1` | Session-start sync: fast-forwards this repo safely and refreshes Codex's global copies |

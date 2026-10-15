@@ -20,7 +20,3 @@ Use the lowest Codex reasoning effort likely to complete the task reliably. Sugg
 | Ultra | Only when substantial work benefits from parallel agents; this is a coordination mode, not a higher reasoning level |
 
 For high-risk work, verify more thoroughly at any effort. Suggest Max or Ultra only with a concrete reason.
-
-## Unity and C# work
-
-For Unity/C# tasks, use the `unity-performance` skill when it is available. If it is not available in this session, remind me once per session that the Unity Performance plugin has Codex support and can be installed from the Codex plugin manager. Do not run Claude Code plugin commands or install it without my request.

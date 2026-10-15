@@ -19,7 +19,11 @@ After editing `~/.claude/CLAUDE.md`, check its line count. If it is over 200 lin
 When I say "commit", also push after committing. Don't ask separately.
 
 ## Suggest an effort level
-Before starting a task, suggest the effort level that fits it, using the guide below. Put it in one line, e.g. "Suggested effort: High (refactor across several files)". If my current level is already right, say nothing. Don't change the level yourself. Check my current level with `get_session` (`"self"`). It can't report Ultracode, so whenever you think a task warrants Ultracode, always say so, even if I might already be on it.
+Before every request, suggest the effort level that fits it, using the guide below. Put it in one line, e.g. "Suggested effort: High (refactor across several files)". If my current level is already right, say nothing and do the work right away. Otherwise it's a 2-step process:
+1. Reply with only the suggestion. Don't start the work.
+2. On my next message, do the work at whatever level I'm on, even if I didn't switch. Don't suggest again for the same request.
+
+Don't change the level yourself. Check my current level with `get_session` (`"self"`). It can't report Ultracode, so whenever you think a task warrants Ultracode, always say so, even if I might already be on it.
 
 | Level | Use for | Examples |
 |---|---|---|

@@ -43,7 +43,9 @@ stamp=.git/last-sync
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)
 if [ $((now - last)) -ge 21600 ]; then
-  if timeout 15 git fetch -q origin 2>/dev/null; then
+  # Stock macOS has no timeout; use gtimeout (coreutils) if present, else fetch without a limit.
+  limit=$(command -v timeout || command -v gtimeout)
+  if ${limit:+"$limit" 15} git fetch -q origin 2>/dev/null; then
     echo "$now" > "$stamp"
     if [ "$(git rev-parse HEAD 2>/dev/null)" != "$(git rev-parse '@{u}' 2>/dev/null)" ]; then
       if [ -n "$(git status --porcelain)" ] || [ -n "$(git log '@{u}..HEAD' --oneline 2>/dev/null)" ]; then

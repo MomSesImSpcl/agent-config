@@ -1,6 +1,6 @@
-# Claude global rules
+# claude-config
 
-Global Claude Code rules, synced across machines.
+My Claude Code config: global rules plus setup guides for the tools they rely on, synced across machines.
 
 | Path | What it is |
 |---|---|
@@ -16,7 +16,7 @@ Global Claude Code rules, synced across machines.
    ```bash
    cd ~/.claude
    git init -b main
-   git remote add origin https://github.com/MomSesImSpcl/claude-global-rules.git
+   git remote add origin https://github.com/MomSesImSpcl/claude-config.git
    printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n!rules/\n!rules/**\n!setup/\n!setup/**\n' >> .git/info/exclude
    git fetch origin && git reset --hard origin/main
    git branch --set-upstream-to=origin/main main

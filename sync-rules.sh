@@ -2,7 +2,7 @@
 # SessionStart hook: fast-forward ~/.claude from the rules repo, at most once per 6h.
 cd "$HOME/.claude" || exit 0
 if [ ! -d .git ]; then
-  echo "Global rules repo not set up here. Clone https://github.com/MomSesImSpcl/claude-global-rules into ~/.claude (see its README)."
+  echo "Claude config repo not set up here. Clone https://github.com/MomSesImSpcl/claude-config into ~/.claude (see its README)."
   exit 0
 fi
 # Older clones only un-ignore the original root files; let rules/ and setup/ through.

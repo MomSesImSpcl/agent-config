@@ -10,7 +10,7 @@
    cd ~/.claude
    git init -b main
    git remote add origin https://github.com/MomSesImSpcl/claude-global-rules.git
-   printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n' >> .git/info/exclude
+   printf '*\n!CLAUDE.md\n!sync-rules.sh\n!README.md\n!RTK.md\n' >> .git/info/exclude
    git fetch origin && git reset --hard origin/main
    git branch --set-upstream-to=origin/main main
    ```
@@ -24,6 +24,12 @@
    }
    ```
 4. Needs `git` authenticated to GitHub (`gh auth login`).
+5. Install rtk, which `RTK.md` relies on, then set up its hook (answer `y` to patch `settings.json`) and restart Claude Code:
+   ```bash
+   winget install rtk-ai.rtk
+   rtk init -g
+   ```
+   `sync-rules.sh` warns at session start while rtk is missing.
 
 ## Day to day
 - Claude commits and pushes rule changes itself (see the "Sync global rules" rule).

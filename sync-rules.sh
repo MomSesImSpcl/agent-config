@@ -5,6 +5,7 @@ if [ ! -d .git ]; then
   echo "Global rules repo not set up here. Clone https://github.com/MomSesImSpcl/claude-global-rules into ~/.claude (see its README)."
   exit 0
 fi
+command -v rtk >/dev/null || echo "rtk is not installed on this machine, but RTK.md expects it. Tell the user to run: winget install rtk-ai.rtk, then rtk init -g (answer y), then restart Claude Code. See ~/.claude/README.md step 5."
 stamp=.git/last-sync
 now=$(date +%s)
 last=$(cat "$stamp" 2>/dev/null || echo 0)

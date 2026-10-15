@@ -1,6 +1,6 @@
-# claude-config
+# agent-config
 
-My shared Claude Code and Codex rules, plus app-specific guidance and setup notes, synced across machines.
+My shared rules for Claude Code and Codex, plus app-specific guidance and setup notes, synced across machines.
 
 ## Rule files
 
@@ -10,7 +10,7 @@ My shared Claude Code and Codex rules, plus app-specific guidance and setup note
 | `CLAUDE.md` | Claude Code entry point and Claude-specific behavior; imports `SHARED.md` |
 | `AGENTS.md` | Codex entry point and Codex-specific behavior; reads the synchronized `SHARED.md` beside it |
 | `rules/` | Topic rules for Claude Code. `rules/unity.md` loads only for Unity/C# files and is also synced to Codex as the `unity-csharp` skill |
-| `setup/` | Tool setup guides |
+| `setup/` | App and tool setup guides |
 | `sync-rules.sh` / `sync-rules.ps1` | Session-start sync: fast-forwards this repo safely and refreshes Codex's global copies |
 
 ## One source for shared behavior
@@ -26,22 +26,21 @@ After a rule edit, inspect the full diff. Commit only relevant tracked source fi
    ```bash
    cd ~/.claude
    git init -b main
-   git remote add origin https://github.com/MomSesImSpcl/claude-config.git
+   git remote add origin https://github.com/MomSesImSpcl/agent-config.git
    printf '*\n!CLAUDE.md\n!AGENTS.md\n!SHARED.md\n!sync-rules.sh\n!sync-rules.ps1\n!README.md\n!LICENSE\n!rules/\n!rules/**\n!setup/\n!setup/**\n' >> .git/info/exclude
    git fetch origin && git reset --hard origin/main
    git branch --set-upstream-to=origin/main main
    ```
    The exclude rule keeps settings, credentials and projects out of the repo.
-   Then add a SessionStart hook to `~/.claude/settings.json` that runs `& "$HOME/.claude/sync-rules.ps1"` (Windows, PowerShell) or `bash ~/.claude/sync-rules.sh` (macOS/Linux). Merge with existing hooks; do not replace them.
-3. In Codex, merge a SessionStart command hook into `~/.codex/hooks.json`. On Windows use `powershell -NoProfile -ExecutionPolicy Bypass -File "$HOME/.claude/sync-rules.ps1"` (works under an `AllSigned` policy); on macOS/Linux use `bash ~/.claude/sync-rules.sh`. Preserve existing hook entries. Run the script once with `-SyncOnly` (PowerShell) or `--sync-only` (Bash). It copies `AGENTS.md`, `SHARED.md`, and `rules/unity.md` (as the `unity-csharp` skill) into Codex home. Review and trust the new hook in Codex if prompted.
-4. Ensure Git is authenticated to GitHub. Sync uses fetch plus fast-forward only; it will not pull over local or unpushed changes.
+3. Ensure Git is authenticated to GitHub (`gh auth login`). Sync uses fetch plus fast-forward only; it will not pull over local or unpushed changes.
+4. Set up each app: [Claude Code](setup/claude.md) · [Codex](setup/codex.md).
 
 ## Day to day
 
 - Both apps edit the same tracked rule sources in this repository.
 - Shared behavior belongs in `SHARED.md`; app-only behavior belongs in that app's entry point or skill.
 - Run the sync script after changing Codex rules so Codex home gets the current files. Claude Code reads the repo's `CLAUDE.md` and imported `SHARED.md` directly.
-- Rule changes are committed and pushed so other machines receive them at the next session start.
+- Rule changes are committed and pushed so other machines receive them at the next session start (checked at most every 6 hours).
 
 ## Tool setup guides
 

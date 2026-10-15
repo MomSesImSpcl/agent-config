@@ -34,7 +34,7 @@ After a rule edit, inspect the full diff. Commit only relevant tracked source fi
    ```
    The exclude rule keeps settings, credentials and projects out of the repo.
    Then add a SessionStart hook to `~/.claude/settings.json` that runs `& "$HOME/.claude/sync-rules.ps1"` (Windows, PowerShell) or `bash ~/.claude/sync-rules.sh` (macOS/Linux). Merge with existing hooks; do not replace them.
-3. In Codex, merge a SessionStart command hook into `~/.codex/hooks.json`. On Windows use `& "$HOME/.claude/sync-rules.ps1"`; on macOS/Linux use `bash ~/.claude/sync-rules.sh`. Preserve existing hook entries. Run the script once with `-SyncOnly` (PowerShell) or `--sync-only` (Bash). It copies `AGENTS.md`, `SHARED.md`, and the Unity skill into Codex home. Review and trust the new hook in Codex if prompted.
+3. In Codex, merge a SessionStart command hook into `~/.codex/hooks.json`. On Windows use `powershell -NoProfile -ExecutionPolicy Bypass -File "$HOME/.claude/sync-rules.ps1"` (works under an `AllSigned` policy); on macOS/Linux use `bash ~/.claude/sync-rules.sh`. Preserve existing hook entries. Run the script once with `-SyncOnly` (PowerShell) or `--sync-only` (Bash). It copies `AGENTS.md`, `SHARED.md`, and the Unity skill into Codex home. Review and trust the new hook in Codex if prompted.
 4. Ensure Git is authenticated to GitHub. Sync uses fetch plus fast-forward only; it will not pull over local or unpushed changes.
 
 ## Day to day

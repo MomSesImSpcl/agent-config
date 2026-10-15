@@ -1,6 +1,6 @@
 # Codex rules
 
-@C:\Users\herdt\.codex\RTK.md
+@RTK.md
 
 ## Shared rules
 

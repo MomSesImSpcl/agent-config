@@ -14,6 +14,8 @@ When you save or update a project memory and the rule would also be useful in ot
 ## Sync global rules
 The rules live in the `~/.claude` repo. A rule for both apps goes in `SHARED.md`; a rule for one app goes in `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex). Never edit the copies in `~/.codex`; they are synced from `~/.claude`. After changing `AGENTS.md`, `SHARED.md` or `.agents/skills/`, refresh the Codex copies: `& "$HOME\.claude\sync-rules.ps1" -SyncOnly` on Windows, `bash ~/.claude/sync-rules.sh --sync-only` on macOS/Linux.
 
+After synchronization, verify that the synchronized copies match their canonical sources and inspect the resulting diff. If synchronization or verification fails, report the failure rather than claiming completion.
+
 After you add or change a rule, commit just the changed rule files with a short descriptive message and `git push` from `~/.claude`. If the push is rejected because GitHub has newer commits (another machine pushed first), run `git pull --rebase` in `~/.claude`, then push again. If the rebase hits a conflict, stop, show me both versions of the conflicting lines, and ask which to keep. Never use `git reset --hard`, `git push --force`, or `git checkout --` on this repo to resolve it. For any other push failure (auth, network), tell me instead of retrying. Don't commit or push my own uncommitted edits without asking.
 
 ## Keep global rules short

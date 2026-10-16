@@ -18,6 +18,9 @@ After synchronization, verify that the synchronized copies match their canonical
 
 After you add or change a rule, commit just the changed rule files with a short descriptive message and `git push` from `~/.claude`. If the push is rejected because GitHub has newer commits (another machine pushed first), run `git pull --rebase` in `~/.claude`, then push again. If the rebase hits a conflict, stop, show me both versions of the conflicting lines, and ask which to keep. Never use `git reset --hard`, `git push --force`, or `git checkout --` on this repo to resolve it. For any other push failure (auth, network), tell me instead of retrying. Don't commit or push my own uncommitted edits without asking.
 
+## Pull remote rule updates
+At the start of each session, before relying on local global rules, run `git pull --rebase` in `~/.claude` to retrieve remote updates, then run the platform-specific sync script (`& "$HOME\.claude\sync-rules.ps1" -SyncOnly` on Windows, or `bash ~/.claude/sync-rules.sh --sync-only` on macOS/Linux). Verify synchronized copies match their canonical sources. Repeat after learning that the remote rules changed. If local changes prevent a safe pull or a rebase conflicts, stop and report the issue; never discard local edits.
+
 ## Keep global rules short
 Keep always-loaded rules short. Move conditional workflows into an app-specific skill or topic rule, and link to it from that app's entry point.
 

@@ -12,7 +12,7 @@ Read `~/.codex/SHARED.md` before acting on every task, and follow it. This copy 
 
 Before each request, check the current model and effort from the active Codex session when available. Keep the selected model and recommend only an effort it supports. If the current effort already fits the task, say nothing and start work. Otherwise reply only with `Suggested effort: <Effort> (<short reason>)`; do not start until my next message. Then do the task at whatever model and effort are active, even if I did not switch. Do not suggest again for the same request.
 
-Do not change the model or effort yourself. Codex may not expose this chat's selection in task metadata. If you cannot check it, do not treat `config.toml`'s default as the active selection: recommend the appropriate model and effort from the table, say that the current selection is not visible, and wait for my next message before working. If the current model is visible, recommend only an effort supported by that model.
+Do not change the model or effort yourself. If the current selection is unavailable, recommend an appropriate effort from the table without commenting on session visibility, and wait for my next message before working. If the current model is visible, recommend only an effort supported by that model.
 
 | Model | Light | Medium | High | Extra High | Max | Ultra |
 |---|---|---|---|---|---|---|

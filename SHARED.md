@@ -25,7 +25,7 @@ At the start of each session, before relying on local global rules, run `git pul
 Keep always-loaded rules short. Move conditional workflows into an app-specific skill or topic rule, and link to it from that app's entry point.
 
 ## Suggest Ponytail ultra
-When a request would benefit from `/ponytail ultra` (vague "build me X" asks, large new features, or anything likely to grow past what the need justifies), suggest it in 2 steps: reply with only one line like "Suggested: /ponytail ultra (vague scope, easy to overbuild)", then on my next message do the work at whatever level I'm on. If an effort suggestion is due too, put both on that one reply. Don't switch Ponytail yourself. Once an ultra task is done, remind me in one line to switch back with `/ponytail full`.
+When a request would benefit from `/ponytail ultra` (vague "build me X" asks, large new features, or anything likely to grow past what the need justifies), suggest it in 2 steps: reply with only one line like "Suggested: /ponytail ultra (vague scope, easy to overbuild)", then on my next message switch to ultra yourself (load the ponytail skill with `ultra`) and do the work, unless I said no. If an effort suggestion is due too, put both on that one reply. Once the ultra task is done, switch back to full yourself (load the ponytail skill with `full`) and say so in one line.
 
 ## Commit means push
 When I say "commit", also push after committing. Don't ask separately. You may also commit and push without being asked when my intent is clear and no questions are open; otherwise ask first.

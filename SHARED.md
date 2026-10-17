@@ -29,3 +29,6 @@ When a request would benefit from `/ponytail ultra` (vague "build me X" asks, la
 
 ## Commit means push
 When I say "commit", also push after committing. Don't ask separately. You may also commit and push without being asked when my intent is clear and no questions are open; otherwise ask first.
+
+## Clean up merged branches
+Once a branch is fully merged into the main branch, delete it locally and on the remote, and remove its worktree when the session using it is done. Check for uncommitted or unmerged work first; never remove a worktree another active session uses.

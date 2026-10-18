@@ -27,6 +27,9 @@ Keep always-loaded rules short. Move conditional workflows into an app-specific 
 ## Suggest Ponytail ultra
 When a request would benefit from `/ponytail ultra` (vague "build me X" asks, large new features, or anything likely to grow past what the need justifies), suggest it in 2 steps: reply with only one line like "Suggested: /ponytail ultra (vague scope, easy to overbuild)", then on my next message switch to ultra yourself (load the ponytail skill with `ultra`) and do the work, unless I said no. If an effort suggestion is due too, put both on that one reply. Once the ultra task is done, switch back to full yourself (load the ponytail skill with `full`) and say so in one line.
 
+## Commands for me to run
+On Windows, write commands I should run for Windows PowerShell 5.1: chain with `;` (or `if ($?) { ... }`), never `&&` or `||`, and tag the block `powershell`.
+
 ## Commit means push
 When I say "commit", also push after committing. Don't ask separately. You may also commit and push without being asked when my intent is clear and no questions are open; otherwise ask first.
 

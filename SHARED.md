@@ -33,5 +33,8 @@ On Windows, write commands I should run for Windows PowerShell 5.1: chain with `
 ## Commit means push
 When I say "commit", also push after committing. Don't ask separately. You may also commit and push without being asked when my intent is clear and no questions are open; otherwise ask first.
 
+## Branch from fresh main
+Before creating a branch for a pull request, run `git fetch` and branch from `origin/<main branch>`, not the local checkout's possibly stale HEAD. If a pull request is behind its base, update it (`gh pr update-branch <n>`).
+
 ## Clean up merged branches
 Once a branch is fully merged into the main branch, delete it locally and on the remote, and remove its worktree when the session using it is done. Check for uncommitted or unmerged work first; never remove a worktree another active session uses.

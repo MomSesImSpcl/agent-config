@@ -41,6 +41,7 @@ if (-not (Test-Path -LiteralPath $cavemanConfig)) {
 if ($settingsText -notmatch '"cache-tax@claude-code-mods"\s*:\s*true') { Write-Output 'The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md.' }
 if ($settingsText -notmatch 'effort-check\.js') { Write-Output 'The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md.' }
 if ($settingsText -notmatch 'hindsight') { Write-Output 'Hindsight is not installed on this machine. Tell the user to follow ~/.claude/setup/hindsight.md.' }
+else { & node (Join-Path $repoRoot 'setup\hindsight-patch.js') --quiet }
 $excludePath = Join-Path $repoRoot '.git\info\exclude'
 if (Test-Path -LiteralPath $excludePath) {
     $excludeLines = @(Get-Content -LiteralPath $excludePath)

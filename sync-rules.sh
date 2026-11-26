@@ -32,7 +32,7 @@ grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is 
 caveman_config="${XDG_CONFIG_HOME:-$HOME/.config}/caveman/config.json"
 [ -f "$caveman_config" ] || { mkdir -p "$(dirname "$caveman_config")" && echo '{ "defaultMode": "ultracave" }' > "$caveman_config"; }
 grep -q '"cache-tax@claude-code-mods": true' settings.json 2>/dev/null || echo "The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md."
-grep -q 'Effort check: before acting' settings.json 2>/dev/null || echo "The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md."
+grep -q 'effort-check.js' settings.json 2>/dev/null || echo "The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md."
 
 if [ ! -d .git ]; then
   echo "Config repo not set up here. Clone https://github.com/MomSesImSpcl/agent-config into ~/.claude (see its README)."

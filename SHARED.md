@@ -32,9 +32,6 @@ When a request would benefit from Ponytail ultra (vague "build me X" asks, large
 ## Commands for me to run
 On Windows, write them for Windows PowerShell 5.1: chain with `;` or `if ($?) { ... }`, never `&&` or `||`, and tag the block `powershell`.
 
-## Commit means push
-"Commit" means commit and push; don't ask separately. You may also commit and push unasked when my intent is clear and no questions are open; otherwise ask first.
-
 ## Branch from fresh main
 Before creating a PR branch, run `git fetch` and branch from `origin/<main branch>`, not the local checkout's possibly stale HEAD. PR behind its base: merge `origin/<main branch>` into its branch locally and push. Never use `gh pr update-branch` or GitHub's Update branch button: their merge commit is GitHub's, which a ruleset can hold for extra approval and so block auto-merge.
 

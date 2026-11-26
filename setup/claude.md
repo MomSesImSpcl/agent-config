@@ -7,6 +7,11 @@ On Windows, also install PowerShell 7, so commands chained with `&&` and `||` wo
 winget install --id Microsoft.PowerShell
 ```
 
+Turn off the Ultracode keyword trigger, so the word `ultracode` in a prompt doesn't start a multi-agent workflow (Ultracode stays available via `/effort ultracode`). Add to `~/.claude/settings.json`:
+```json
+"workflowKeywordTriggerEnabled": false
+```
+
 Add a SessionStart hook to `~/.claude/settings.json`. Merge it into any existing `hooks`; do not replace them.
 
 Windows (PowerShell):

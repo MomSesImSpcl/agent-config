@@ -39,6 +39,7 @@ if (-not (Test-Path -LiteralPath $cavemanConfig)) {
     [IO.File]::WriteAllText($cavemanConfig, "{ `"defaultMode`": `"ultracave`" }`n")
 }
 if ($settingsText -notmatch '"cache-tax@claude-code-mods"\s*:\s*true') { Write-Output 'The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md.' }
+if ($settingsText -notmatch '"workflowKeywordTriggerEnabled"\s*:\s*false') { Write-Output 'The Ultracode keyword trigger is on on this machine. Tell the user to follow ~/.claude/setup/claude.md.' }
 if ($settingsText -notmatch 'effort-check\.js') { Write-Output 'The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md.' }
 if ($settingsText -notmatch 'hindsight') { Write-Output 'Hindsight is not installed on this machine. Tell the user to follow ~/.claude/setup/hindsight.md.' }
 else { & node (Join-Path $repoRoot 'setup\hindsight-patch.js') --quiet }

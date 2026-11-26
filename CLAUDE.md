@@ -21,7 +21,7 @@ Pick the lowest level that is enough, by reasoning complexity, uncertainty, scop
 | Extra (xhigh) | Deep, sustained reasoning across interconnected systems, hard constraints or extensive evaluation | Distributed systems, system-wide redesigns, difficult concurrency issues |
 | Max | Exceptional difficulty, novel problems, critical correctness, or problems Extra failed to solve | Only where more reasoning clearly helps |
 
-**Ultracode** (toggle, any level): multi-agent orchestration for large tasks that split into independent parts, e.g. repository-wide audits, large migrations, independent implementations. Not smarter than Max: it is about parallel work, not deeper reasoning.
+**Ultracode** (toggle, any level, `/effort ultracode`): runs a multi-agent workflow for every substantive task until turned off. For work too big for one conversation: codebase-wide audits, large migrations, cross-checked research, plans from several angles, bug sweeps, fix-until-the-check-passes loops. Not for small tasks. Far more tokens and time; not smarter than Max.
 
 #### Rules for choosing
 1. Default to the lowest level likely to succeed reliably.

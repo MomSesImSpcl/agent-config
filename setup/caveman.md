@@ -14,7 +14,12 @@ Terse reply style, token-saving hooks, and an optional Auto model that picks mod
    claude plugin install caveman@caveman
    ```
    Then run `caveman.cmd doctor claude --fix` (see Troubleshooting if it refuses).
-4. Restart Claude Code.
+4. Set the default mode for new sessions to `ultracave`. Create the user config file with:
+   ```json
+   { "defaultMode": "ultracave" }
+   ```
+   On Windows it goes in `%APPDATA%\caveman\config.json`; on macOS/Linux in `~/.config/caveman/config.json`. Valid values: `off`, `caveman`, `ultracave`, `megacave`, `manual`. `/ultracave` and similar commands change only the current session.
+5. Restart Claude Code.
 
 `sync-rules.sh` warns at session start while Caveman is missing.
 

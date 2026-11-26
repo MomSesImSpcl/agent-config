@@ -9,8 +9,12 @@ Terse reply style, token-saving hooks, and an optional Auto model that picks mod
    ```bash
    npx.cmd @caveman-ai/cli@latest
    ```
-   This includes the Caveman plugin. Don't install the plugin separately.
-3. Restart Claude Code.
+3. Install the plugin. The installer may not add it, so check with `claude plugin list`, and if `caveman@caveman` is missing run:
+   ```bash
+   claude plugin install caveman@caveman
+   ```
+   Then run `caveman.cmd doctor claude --fix` (see Troubleshooting if it refuses).
+4. Restart Claude Code.
 
 `sync-rules.sh` warns at session start while Caveman is missing.
 

@@ -14,11 +14,11 @@ Pick the lowest level that is enough, by reasoning complexity, uncertainty, scop
 
 | Level | Use for | Examples |
 |---|---|---|
-| Low | Straightforward, deterministic tasks with clear instructions and minimal reasoning | Formatting, documentation, renaming, simple fixes |
-| Medium | Moderate reasoning with established solutions and limited uncertainty | Standard features, routine refactoring, unit tests, isolated debugging |
-| High | Complex multistep reasoning, interacting components, unclear solutions or real trade-offs | Advanced features, routine architecture choices, performance optimization, complex debugging |
-| Extra (xhigh) | Deep, sustained reasoning across interconnected systems, hard constraints or extensive evaluation | Distributed systems, system-wide redesigns, difficult concurrency issues |
-| Max | Exceptional difficulty, novel problems, critical correctness, or problems Extra failed to solve | Only where more reasoning clearly helps |
+| Low | Quick, deterministic tasks with clear instructions, where I review each result | Formatting, documentation, renaming, simple fixes, brainstorming, a first sketch |
+| Medium | Day-to-day work with a clear scope and established solutions. Opus 5.5's default; there it matches Opus 5 at High | Standard features, routine refactoring, unit tests |
+| High | Work where verification matters or edge cases are likely; complex reasoning, interacting components, real trade-offs | Fixing bugs in an existing codebase, advanced features, routine architecture choices, performance optimization |
+| Extra (xhigh) | Long-running agentic work (30+ minutes) or deep reasoning across interconnected systems, at higher token spend | System-wide redesigns, distributed systems, difficult concurrency issues |
+| Max | Hard problems worked through without me, critical correctness, or what Extra failed to solve. Diminishing returns, prone to overthinking | Security vulnerability hunts; only where more reasoning clearly helps |
 
 **Ultracode** (toggle, any level, `/effort ultracode`): runs a multi-agent workflow for every substantive task until turned off. For work too big for one conversation: codebase-wide audits, large migrations, cross-checked research, plans from several angles, bug sweeps, fix-until-the-check-passes loops. Not for small tasks. Far more tokens and time; not smarter than Max. Suggest it only when parallel work outweighs the coordination overhead, with a reason, on the one-line reply, e.g. "Suggested effort: High + Ultracode (independent parts)", and wait for my next message, even if the level already fits or Ultracode might already be on (`get_session` can't report it).
 

@@ -9,7 +9,7 @@ On every new request, compare my current level with the one the task needs (guid
 - Level fits: say nothing, start the work.
 - Doesn't fit: reply with only one line, e.g. "Suggested effort: High (unclear cause, several interacting parts)", and don't start. On my next message, do the work at whatever level I'm on, switched or not. Don't suggest again for the same request.
 - Can't check the level at all: always give that one-line reply, e.g. "Suggested effort: High (can't check your level)", and wait for my next message, even if I might already be on that level.
-- `get_session` can't report Ultracode: whenever a task warrants it, say so, even if I might already be on it.
+- Ultracode is a toggle that works with any level, not a level itself. `get_session` can't report it, so whenever a task warrants it, put it on the one-line reply, e.g. "Suggested effort: High + Ultracode (independent parts)", and wait for my next message, even if the level already fits or Ultracode might already be on.
 
 Pick the lowest level that is enough, by reasoning complexity, uncertainty, scope, risk and how hard the result is to verify. Task length and file count don't decide it.
 
@@ -20,7 +20,8 @@ Pick the lowest level that is enough, by reasoning complexity, uncertainty, scop
 | High | Complex multistep reasoning, interacting components, unclear solutions or real trade-offs | Advanced features, routine architecture choices, performance optimization, complex debugging |
 | Extra (xhigh) | Deep, sustained reasoning across interconnected systems, hard constraints or extensive evaluation | Distributed systems, system-wide redesigns, difficult concurrency issues |
 | Max | Exceptional difficulty, novel problems, critical correctness, or problems Extra failed to solve | Only where more reasoning clearly helps |
-| Ultracode | Multi-agent orchestration for large tasks that split into independent parts | Repository-wide audits, large migrations, independent implementations. Not smarter than Max: it is about parallel work, not deeper reasoning |
+
+**Ultracode** (toggle, any level): multi-agent orchestration for large tasks that split into independent parts, e.g. repository-wide audits, large migrations, independent implementations. Not smarter than Max: it is about parallel work, not deeper reasoning.
 
 #### Rules for choosing
 1. Default to the lowest level likely to succeed reliably.

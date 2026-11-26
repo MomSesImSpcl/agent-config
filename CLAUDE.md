@@ -5,13 +5,13 @@
 ## Claude-specific guidance
 
 ### Suggest an effort level
-Before every request, suggest the effort level that fits it, using the guide below. Put it in one line, e.g. "Suggested effort: High (unclear cause, several interacting parts)". If my current level is already right, say nothing and do the work right away. Otherwise it's a 2-step process:
-1. Reply with only the suggestion. Don't start the work.
-2. On my next message, do the work at whatever level I'm on, even if I didn't switch. Don't suggest again for the same request.
+On every new request, compare my current level with the one the task needs (guide below). Never change the level yourself. Current level: the effort hook's "Current effort: …" line; else `get_session` (`"self"`); else a level the host states (e.g. an AI Workspace session note).
+- Level fits: say nothing, start the work.
+- Doesn't fit: reply with only one line, e.g. "Suggested effort: High (unclear cause, several interacting parts)", and don't start. On my next message, do the work at whatever level I'm on, switched or not. Don't suggest again for the same request.
+- Can't check the level at all: always give that one-line reply, e.g. "Suggested effort: High (can't check your level)", and wait for my next message, even if I might already be on that level.
+- `get_session` can't report Ultracode: whenever a task warrants it, say so, even if I might already be on it.
 
-Don't change the level yourself. Check it on every new request. The effort hook states my current level on every message ("Current effort: …"); use that. If it doesn't, check with `get_session` (`"self"`), or use a level the host states (for example an AI Workspace session note). If you can't check it at all, always use the 2 steps, even if I might already be on that level: reply with only one line like "Suggested effort: High (can't check your level)" and wait for my next message. `get_session` can't report Ultracode, so whenever you think a task warrants Ultracode, always say so, even if I might already be on it.
-
-Pick the lowest level that is enough, based on reasoning complexity, uncertainty, scope, risk and how hard the result is to verify. Task length and file count don't decide it.
+Pick the lowest level that is enough, by reasoning complexity, uncertainty, scope, risk and how hard the result is to verify. Task length and file count don't decide it.
 
 | Level | Use for | Examples |
 |---|---|---|
@@ -24,14 +24,14 @@ Pick the lowest level that is enough, based on reasoning complexity, uncertainty
 
 #### Rules for choosing
 1. Default to the lowest level likely to succeed reliably.
-2. Weigh complexity and uncertainty over task size.
-3. For high-risk changes, verify more thoroughly, whatever the level.
-4. Go up a level only when more reasoning is likely to solve the problem. Missing context needs looking up, not a higher level.
-5. Go up one level if a previous attempt at the current level failed.
-6. Suggest one level per request. If a later phase clearly needs a different level, mention it in one line at that point, without stopping.
-7. Suggest Ultracode only when parallel work outweighs the coordination overhead.
-8. Suggest Max or Ultracode only with a reason. They are slow and costly.
+2. Complexity and uncertainty outweigh task size.
+3. High-risk changes: verify more thoroughly, whatever the level.
+4. Go up only when more reasoning is likely to solve it. Missing context needs looking up, not a higher level.
+5. A previous attempt at the current level failed: go up one.
+6. One level per request. If a later phase clearly needs another, say so in one line without stopping.
+7. Ultracode only when parallel work outweighs the coordination overhead.
+8. Max or Ultracode only with a reason: they are slow and costly.
 9. Respect my overrides and the levels the current model supports.
 
 ### Keep Claude rules small
-After editing `~/.claude/CLAUDE.md`, check its line count. If it is over 200 lines, tell me and suggest a reasonable split into topic files in `~/.claude/rules/` (e.g. `git.md`, `writing.md`). Also suggest which rules should only apply to certain file types, using `paths:` frontmatter (e.g. `paths: ["**/*.ts"]`). Only suggest; make no split, move or `paths:` change until I approve. If I approve, update the repo's `.git/info/exclude` so `rules/` is tracked, then commit and push as in `SHARED.md`.
+After editing `~/.claude/CLAUDE.md`, check its line count. Over 200 lines: tell me and suggest a split into topic files in `~/.claude/rules/` (e.g. `git.md`, `writing.md`), plus which rules should apply only to certain file types via `paths:` frontmatter (e.g. `paths: ["**/*.ts"]`). Suggest only: no split, move or `paths:` change until I approve. Once approved, update the repo's `.git/info/exclude` so `rules/` is tracked, then commit and push as in `SHARED.md`.

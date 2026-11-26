@@ -3,16 +3,13 @@
 @RTK.md
 
 ## Shared rules
+Before every task, read and follow `~/.codex/SHARED.md`. It is synced from `~/.claude/SHARED.md`: edit that canonical file, never the copy. After changing a rule, sync the Codex copies (`& "$HOME\.claude\sync-rules.ps1" -SyncOnly` on Windows, `bash ~/.claude/sync-rules.sh --sync-only` on macOS/Linux) and inspect the diff.
 
-Read `~/.codex/SHARED.md` before acting on every task, and follow it. This copy is synchronized from the canonical `~/.claude/SHARED.md`; edit the canonical file in `~/.claude`, never the synchronized copy. After changing a rule, sync the Codex copies and inspect the resulting diff. On Windows run `& "$HOME\.claude\sync-rules.ps1" -SyncOnly`; on macOS/Linux run `bash ~/.claude/sync-rules.sh --sync-only`.
-
-## Codex-specific model and effort guidance
-
-### Suggest an effort level
-
-Before each request, check the current model and effort from the active Codex session when available. Keep the selected model and recommend only an effort it supports. If the current effort already fits the task, say nothing and start work. Otherwise reply only with `Suggested effort: <Effort> (<short reason>)`; do not start until my next message. Then do the task at whatever model and effort are active, even if I did not switch. Do not suggest again for the same request.
-
-Do not change the model or effort yourself. If the current selection is unavailable, recommend an appropriate effort from the table without commenting on session visibility, and wait for my next message before working. If the current model is visible, recommend only an effort supported by that model.
+## Suggest an effort level
+Before each request, check the session's current model and effort when available. Never change either yourself. Keep the selected model, and recommend only an effort it supports.
+- Effort fits the task: say nothing, start work.
+- Doesn't fit: reply only `Suggested effort: <Effort> (<short reason>)` and don't start. On my next message, do the task at whatever model and effort are active, switched or not. Don't suggest again for the same request.
+- Current selection not visible: recommend an effort from the table without commenting on session visibility, and wait for my next message before working.
 
 | Model | Light | Medium | High | Extra High | Max | Ultra |
 |---|---|---|---|---|---|---|
@@ -20,4 +17,4 @@ Do not change the model or effort yourself. If the current selection is unavaila
 | Sol | Focused tasks with more capability | Everyday coding and analysis | Complex debugging, planning, or tradeoffs | Deep reviews or long-horizon tasks | Exceptional difficulty or critical correctness | Extremely rare tasks where Max is insufficient |
 | Astra | Simple tasks where you want the strongest model | Ambitious, multistep work | Difficult reasoning and high-stakes reviews | The hardest sustained analysis | Highest-stakes work when Extra High is insufficient | Extremely rare tasks where Max is insufficient |
 
-For high-risk work, verify more thoroughly at any setting.
+High-risk work: verify more thoroughly at any setting.

@@ -6,22 +6,22 @@ My shared rules for Claude Code and Codex, plus app-specific guidance and setup 
 
 | Path | What it is |
 |---|---|
-| `SHARED.md` | Canonical rules that apply to both apps |
+| `SHARED.md` | Canonical rules for both apps |
 | `CLAUDE.md` | Claude Code entry point and Claude-specific behavior; imports `SHARED.md` |
-| `AGENTS.md` | Codex entry point and Codex-specific behavior; reads the synchronized `SHARED.md` beside it |
+| `AGENTS.md` | Codex entry point and Codex-specific behavior; reads the synced `SHARED.md` beside it |
 | `rules/` | Topic rules for Claude Code. `rules/unity.md` loads only for Unity/C# files and is also synced to Codex as the `unity-csharp` skill |
 | `setup/` | App and tool setup guides |
 | `sync-rules.sh` / `sync-rules.ps1` | Session-start sync: fast-forwards this repo safely and refreshes Codex's global copies |
 
 ## One source for shared behavior
 
-`SHARED.md` is authoritative for rules that should match in both apps. If a rule is changed from a Codex task, update `SHARED.md` and sync the Codex copy; Claude Code imports the same file through `CLAUDE.md`. If changed from Claude Code, update the same shared source and run the sync script so Codex gets the change too. Keep app-specific behavior in `AGENTS.md` or `CLAUDE.md`; if that behavior changes a shared rule, update `SHARED.md` as well.
+`SHARED.md` is authoritative for rules both apps share; Claude Code imports it through `CLAUDE.md`, and Codex gets a synced copy. Whichever app changes a shared rule, edit `SHARED.md` and run the sync script. App-only behavior goes in `CLAUDE.md` or `AGENTS.md`; if it changes a shared rule, update `SHARED.md` too.
 
-After a rule edit, inspect the full diff. Commit only relevant tracked source files in this repository, then push. Never include local settings, caches, credentials, unrelated changes, or uncommitted user edits without asking. Never reset or force-push. If rebase conflicts, stop and ask which version to keep.
+After a rule edit, inspect the full diff, commit only the relevant tracked files, and push. Never include local settings, caches, credentials, unrelated changes or uncommitted user edits without asking. Never reset or force-push. On a rebase conflict, stop and ask which version to keep.
 
 ## Setup on a new machine
 
-1. Back up existing `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` (they will be replaced).
+1. Back up existing `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`; they will be replaced.
 2. Clone into `~/.claude` (works even if the folder already exists):
    ```bash
    cd ~/.claude
@@ -32,16 +32,15 @@ After a rule edit, inspect the full diff. Commit only relevant tracked source fi
    git branch --set-upstream-to=origin/main main
    ```
    The exclude rule keeps settings, credentials and projects out of the repo.
-3. Ensure Git is authenticated to GitHub (`gh auth login`). Sync uses fetch plus fast-forward only; it will not pull over local or unpushed changes.
+3. Authenticate Git to GitHub (`gh auth login`). Sync only fetches and fast-forwards; it never pulls over local or unpushed changes.
 4. Set up each app: [Claude Code](setup/claude.md) · [Codex](setup/codex.md).
 
 ## Day to day
 
-- Both apps edit the same tracked rule sources in this repository.
-- Shared behavior belongs in `SHARED.md`; app-only behavior belongs in that app's entry point or skill.
-- Run the sync script after changing Codex rules so Codex home gets the current files. Claude Code reads the repo's `CLAUDE.md` and imported `SHARED.md` directly.
-- Rule changes are committed and pushed so other machines receive them at the next session start (checked at most every 6 hours).
+- Both apps edit the same tracked rule files here. Shared behavior goes in `SHARED.md`; app-only behavior in that app's entry point or skill.
+- After changing Codex rules, run the sync script so Codex's home gets the current files. Claude Code reads `CLAUDE.md` and the imported `SHARED.md` straight from the repo.
+- Rule changes are committed and pushed, so other machines get them at their next session start (checked at most every 6 hours).
 
 ## Tool setup guides
 
-[RTK](setup/rtk.md) · [Ponytail](setup/ponytail.md) · [Caveman](setup/caveman.md) · [Cache Tax](setup/cache-tax.md) · [Effort hook](setup/effort-hook.md)
+[RTK](setup/rtk.md) · [Ponytail](setup/ponytail.md) · [Caveman](setup/caveman.md) · [Cache Tax](setup/cache-tax.md) · [Effort hook](setup/effort-hook.md) · [Hindsight](setup/hindsight.md) · [Permissions](setup/permissions.md)

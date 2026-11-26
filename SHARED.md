@@ -29,9 +29,6 @@ Keep always-loaded rules short. Move conditional workflows into an app-specific 
 ## Switch to Ponytail ultra
 When a request would benefit from Ponytail ultra (vague "build me X" asks, large new features, anything likely to outgrow what the need justifies): say so in one line, e.g. "Switching to Ponytail ultra (vague scope, easy to overbuild)", then load the ponytail skill with `ultra` right away and do the work. Don't wait for my reply. If an effort suggestion is due, put that line on the suggestion reply and switch when the work starts. When the ultra task is done, load the ponytail skill with `full` and say so in one line. Ponytail's own status may keep showing `full` meanwhile; that is expected.
 
-## Commands for me to run
-On Windows, write them for Windows PowerShell 5.1: chain with `;` or `if ($?) { ... }`, never `&&` or `||`, and tag the block `powershell`.
-
 ## Branch from fresh main
 Before creating a PR branch, run `git fetch` and branch from `origin/<main branch>`, not the local checkout's possibly stale HEAD. PR behind its base: merge `origin/<main branch>` into its branch locally and push. Never use `gh pr update-branch` or GitHub's Update branch button: their merge commit is GitHub's, which a ruleset can hold for extra approval and so block auto-merge.
 

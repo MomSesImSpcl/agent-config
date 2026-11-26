@@ -2,6 +2,11 @@
 
 Claude Code reads `~/.claude/CLAUDE.md` (which imports `SHARED.md`) and `~/.claude/rules/` directly from the repo, so it only needs the sync hook.
 
+On Windows, also install PowerShell 7, so commands chained with `&&` and `||` work (Windows PowerShell 5.1 rejects them). Open it as `pwsh`, not `powershell`:
+```powershell
+winget install --id Microsoft.PowerShell
+```
+
 Add a SessionStart hook to `~/.claude/settings.json`. Merge it into any existing `hooks`; do not replace them.
 
 Windows (PowerShell):

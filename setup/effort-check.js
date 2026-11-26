@@ -10,18 +10,22 @@ process.stdin.on('data', (c) => (input += c)).on('end', () => {
     data = JSON.parse(input);
     level = data.effort && data.effort.level;
   } catch (e) {}
-  // Message hooks get no effort field. The desktop app's session record holds the live level.
-  if (!level && data.session_id) level = fromAppRecord(data.session_id);
-  // Otherwise the transcript records it on each assistant entry.
-  if (!level && data.transcript_path) {
+  // Message hooks get no effort field. The desktop app's session record holds the live level and model.
+  const rec = data.session_id ? fromAppRecord(data.session_id) : null;
+  let model = rec && rec.model;
+  if (!level && rec) level = rec.effort;
+  // Otherwise the transcript records both on each assistant entry.
+  if ((!level || !model) && data.transcript_path) {
     try {
       const tail = fs.readFileSync(data.transcript_path, 'utf8').slice(-500000);
-      const hits = [...tail.matchAll(/"effort":"(\w+)"/g)];
-      if (hits.length) level = hits[hits.length - 1][1] + ' (as of the last reply)';
+      const last = (re) => { const h = [...tail.matchAll(re)]; return h.length ? h[h.length - 1][1] : null; };
+      if (!level && last(/"effort":"(\w+)"/g)) level = last(/"effort":"(\w+)"/g) + ' (as of the last reply)';
+      if (!model) model = last(/"model":"(claude-[\w.-]+)"/g);
     } catch (e) {}
   }
   level = level || process.env.CLAUDE_EFFORT || 'unknown, check with get_session(self)';
-  console.log(`Effort check: before acting on a new request, follow the CLAUDE.md effort-suggestion rule. Current effort: ${level}.`);
+  model = model || 'unknown, check with get_session(self)';
+  console.log(`Effort check: before acting on a new request, follow the CLAUDE.md effort-suggestion rule. Current effort: ${level}. Current model: ${model}.`);
 });
 
 // Desktop app on Windows: <LOCALAPPDATA>\Claude-Data\*\claude-code-sessions\*\*\local_*.json, matched by cliSessionId.
@@ -39,7 +43,7 @@ function fromAppRecord(sessionId) {
   for (const [, f] of byAge) {
     try {
       const rec = JSON.parse(fs.readFileSync(f, 'utf8'));
-      if (rec.cliSessionId === sessionId && rec.effort) return rec.effort;
+      if (rec.cliSessionId === sessionId) return rec;
     } catch (e) {}
   }
 }

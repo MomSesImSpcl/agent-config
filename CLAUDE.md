@@ -4,6 +4,18 @@
 
 ## Claude-specific guidance
 
+### Suggest a model
+Only on the first request of a session: if the current model (the effort hook's "Current model: …"; else `get_session`) doesn't fit what the session is for, put the model on the one-line suggestion, e.g. "Suggested: Sonnet 5.5, Medium (routine refactor)", and wait for my next message. Never suggest switching models mid-session: a switch rereads the whole context. If the work later moves to a clearly different scope for a sustained stretch, suggest in one line a new session with the fitting model. Pick the cheapest model likely to succeed.
+
+| Model | Best for | Cost in/out per MTok | Speed |
+|---|---|---|---|
+| Haiku 5.5 | Simple, high-volume tasks: classification, extraction, routing, quick lookups | $0.10 / $0.50 (more on prompts over 100K tokens) | Fastest |
+| Sonnet 5.5 | Daily coding with a clear scope; best balance of speed and intelligence | $2 / $10 | Fast |
+| Opus 5.5 | Default for most work: complex reasoning, long-running agentic coding and knowledge work | $4 / $20 | Moderate |
+| Fable 5.2 | Hardest, longest tasks: ambiguous root-cause or outage debugging, architecture, work bigger than one sitting, or where Opus 5.5 at higher effort falls short | $8 / $40 | Moderate |
+
+All four have 1M context and every effort level.
+
 ### Suggest an effort level
 On every new request, compare my current level with the one the task needs (guide below). Never change the level yourself. Current level: the effort hook's "Current effort: …" line; else `get_session` (`"self"`); else a level the host states (e.g. an AI Workspace session note).
 - Level fits: say nothing, start the work.

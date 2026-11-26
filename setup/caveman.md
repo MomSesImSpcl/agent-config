@@ -14,7 +14,7 @@ Terse reply style, token-saving hooks, and an optional Auto model that picks mod
    claude plugin install caveman@caveman
    ```
    Then run `caveman.cmd doctor claude --fix` (see Troubleshooting if it refuses).
-4. Set the default mode for new sessions to `ultracave`. Create the user config file with:
+4. The default mode for new sessions is `ultracave`. The sync scripts create this user config file at session start if it is missing, and never overwrite an existing one:
    ```json
    { "defaultMode": "ultracave" }
    ```

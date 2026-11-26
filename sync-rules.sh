@@ -28,6 +28,9 @@ fi
 command -v rtk >/dev/null || echo "rtk is not installed on this machine, but rules/rtk.md expects it. Tell the user to follow ~/.claude/setup/rtk.md."
 grep -q '"ponytail@ponytail": true' settings.json 2>/dev/null || echo "The Ponytail plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/ponytail.md."
 grep -q '"caveman@caveman": true' settings.json 2>/dev/null || echo "Caveman is not installed on this machine. Tell the user to follow ~/.claude/setup/caveman.md."
+# Default Caveman mode for new sessions; never overwrite an existing choice.
+caveman_config="${XDG_CONFIG_HOME:-$HOME/.config}/caveman/config.json"
+[ -f "$caveman_config" ] || { mkdir -p "$(dirname "$caveman_config")" && echo '{ "defaultMode": "ultracave" }' > "$caveman_config"; }
 grep -q '"cache-tax@claude-code-mods": true' settings.json 2>/dev/null || echo "The Cache Tax plugin is not installed on this machine. Tell the user to follow ~/.claude/setup/cache-tax.md."
 grep -q 'Effort check: before acting' settings.json 2>/dev/null || echo "The effort hook is not installed on this machine. Tell the user to follow ~/.claude/setup/effort-hook.md."
 

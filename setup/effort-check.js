@@ -10,7 +10,9 @@ process.stdin.on('data', (c) => (input += c)).on('end', () => {
     data = JSON.parse(input);
     level = data.effort && data.effort.level;
   } catch (e) {}
-  // Message hooks get no effort field; the transcript records it on each assistant entry.
+  // Message hooks get no effort field. The desktop app's session record holds the live level.
+  if (!level && data.session_id) level = fromAppRecord(data.session_id);
+  // Otherwise the transcript records it on each assistant entry.
   if (!level && data.transcript_path) {
     try {
       const tail = fs.readFileSync(data.transcript_path, 'utf8').slice(-500000);
@@ -21,3 +23,23 @@ process.stdin.on('data', (c) => (input += c)).on('end', () => {
   level = level || process.env.CLAUDE_EFFORT || 'unknown, check with get_session(self)';
   console.log(`Effort check: before acting on a new request, follow the CLAUDE.md effort-suggestion rule. Current effort: ${level}.`);
 });
+
+// Desktop app on Windows: <LOCALAPPDATA>\Claude-Data\*\claude-code-sessions\*\*\local_*.json, matched by cliSessionId.
+function fromAppRecord(sessionId) {
+  const path = require('path');
+  const root = path.join(process.env.LOCALAPPDATA || '', 'Claude-Data');
+  const ls = (dir) => { try { return fs.readdirSync(dir).map((n) => path.join(dir, n)); } catch (e) { return []; } };
+  const files = [];
+  for (const account of ls(root))
+    for (const a of ls(path.join(account, 'claude-code-sessions')))
+      for (const b of ls(a)) for (const f of ls(b)) if (f.endsWith('.json')) files.push(f);
+  // The active session's record was touched most recently; check newest first.
+  const byAge = files.map((f) => { try { return [fs.statSync(f).mtimeMs, f]; } catch (e) { return [0, f]; } })
+    .sort((x, y) => y[0] - x[0]).slice(0, 50);
+  for (const [, f] of byAge) {
+    try {
+      const rec = JSON.parse(fs.readFileSync(f, 'utf8'));
+      if (rec.cliSessionId === sessionId && rec.effort) return rec.effort;
+    } catch (e) {}
+  }
+}
